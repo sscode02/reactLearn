@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 type WarnComponentProps = {
   isShowWarn: Boolean
@@ -52,4 +52,26 @@ class ConditionalRendering extends React.Component<MyProps, MyState> {
   }
 }
 
-export default ConditionalRendering
+const ConditionalRenderingFC: React.FC = () => {
+  const [isShowWarn, setIsShowWarn] = useState(false)
+
+  const handleClick = () => {
+    setIsShowWarn(!isShowWarn);
+  }
+  return (
+    <div>
+      <WarnComponentFC isShowWarn={isShowWarn} />
+      <button onClick={handleClick}> Click Me!</button>
+    </div>
+  )
+}
+
+const WarnComponentFC: React.FC<WarnComponentProps> = ({ isShowWarn }) => {
+  console.log(isShowWarn)
+  if (!isShowWarn) return null
+  return (
+    <div>Warning !</div>
+  )
+}
+
+export default ConditionalRenderingFC
